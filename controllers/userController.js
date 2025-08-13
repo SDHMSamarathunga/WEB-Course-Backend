@@ -1,7 +1,9 @@
 import User from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"; //Authentication library
+import dotenv from "dotenv"; // For environment variables
 
+dotenv.config(); // Load environment variables from .env file
 
 export function createUser(req,res){
 
@@ -11,7 +13,7 @@ export function createUser(req,res){
 
     const userData = {
         firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        lastName: req.body.lastName, 
         email: req.body.email,
         password: passwordHash,
         
@@ -62,7 +64,7 @@ export function loginUser(req, res) {
                                 image : user.image
 
                             },
-                            "harsh-404" // Secret key for signing the token
+                            process.env.JWT_SECRET, // Secret key for signing the token
                         );
                         res.json({
                             token: token,

@@ -21,7 +21,7 @@ app.use(
             const token = value.replace("Bearer ",""); // Extracting token from Authorization header
             jwt.verify(
                 token, 
-                "harsh-404",
+                process.env.JWT_SECRET, // Using JWT secret from environment variables
                 (err, decoded) => {
                     if(decoded == null){
                         res.status(403).json({
