@@ -5,13 +5,14 @@ import userRouter from './routers/userRouter.js'; // Importing userRouter
 import jwt from 'jsonwebtoken'; // Importing jsonwebtoken for authentication
 import productRouter from './routers/productRouter.js';
 import dotenv from "dotenv"; // Importing dotenv for environment variables
+import cors from "cors"; // Importing cors for handling cross-origin requests
 
 dotenv.config(); // Load environment variables from .env file
 
 let app = express(); // Creating an instance of express
 
 app.use(bodyParser.json()); // Middleware to parse JSON bodies
-
+app.use(cors()); // Middleware to enable CORS
 //Create own middleware
 app.use(
     (req, res, next) => {
@@ -55,8 +56,8 @@ mongoose.connect(connectionString).then(
 
 
 //Create User Router
-app.use("/users", userRouter);
-app.use("/products", productRouter); // Use productRouter for /products endpoint
+app.use("/api/users", userRouter);
+app.use("/api/products", productRouter); // Use productRouter for /products endpoint
 
 
 
