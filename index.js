@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken'; // Importing jsonwebtoken for authentication
 import productRouter from './routers/productRouter.js';
 import dotenv from "dotenv"; // Importing dotenv for environment variables
 import cors from "cors"; // Importing cors for handling cross-origin requests
+import orderRouter from './routers/orderRouter.js';
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -58,26 +59,10 @@ mongoose.connect(connectionString).then(
 //Create User Router
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter); // Use productRouter for /products endpoint
+app.use("/api/orders", orderRouter); // Use orderRouter for /orders endpoint
 
 
-
-app.put('/',        
-    (req , res) => {
-    res.json({
-        message: "This is put request"
-    });
-    console.log("PUT request received");
-});
-
-app.delete('/', 
-    (req , res) => {
-   res.json({
-       message: "This is delete request"
-   });
-    console.log("DELETE request received"); 
-});
-
-
+//Start the server
 app.listen(5000,
     (req , res) => {
         console.log("Server is Started.. ");
